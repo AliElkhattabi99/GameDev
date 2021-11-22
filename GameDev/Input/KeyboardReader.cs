@@ -35,12 +35,12 @@ namespace GameDev.Input
                     canJump = true;
                 }
             }
-            if (state.IsKeyDown(Keys.Space))
+            if (state.IsKeyDown(Keys.Up))
             {
                 click = true;
                 direction.Y -= 2;
             }
-            if ((click) && (state.IsKeyUp(Keys.Space)))
+            if ((click) && (state.IsKeyUp(Keys.Up)))
             {
                 direction.Y += 2;
                 click = false;
@@ -58,10 +58,7 @@ namespace GameDev.Input
             {
                 direction.X += 1;
             }
-            if (state.IsKeyDown(Keys.Up))
-            {
-                direction.Y -= 1;
-            }
+            
             if (state.IsKeyDown(Keys.Down))
             {
                 direction.Y += 1;

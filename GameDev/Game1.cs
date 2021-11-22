@@ -10,8 +10,13 @@ namespace GameDev
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _heroTexture;
+        private Texture2D _run;
+        private Texture2D _jump;
+        private Texture2D _slash;
+        private Texture2D _death;
+        private Texture2D _idle;
         private Hero hero;
+
 
         public Game1()
         {
@@ -25,7 +30,8 @@ namespace GameDev
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            hero = new Hero(_heroTexture, new KeyboardReader());
+            hero = new Hero(_run, new KeyboardReader());
+            //hero = new Hero(_jump, new KeyboardReader());
         }
 
         protected override void LoadContent()
@@ -33,7 +39,11 @@ namespace GameDev
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _heroTexture = Content.Load<Texture2D>("run-Sheet");
+            _run = Content.Load<Texture2D>("run-Sheet");
+            _jump = Content.Load<Texture2D>("long-jump");
+            _slash = Content.Load<Texture2D>("slash-Sheet");
+            _death= Content.Load<Texture2D>("death-Sheet");
+            _idle = Content.Load<Texture2D>("idle-Sheet");
         }
 
         protected override void Update(GameTime gameTime)

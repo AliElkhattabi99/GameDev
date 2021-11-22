@@ -18,6 +18,7 @@ namespace GameDev
         private Vector2 speed = new Vector2(1, 1);
         private Vector2 versnelling = new Vector2(0.1f, 0.1f);
         private IInputReader inputReader;
+        KeyboardState state = Keyboard.GetState();
 
         public bool IsDestinationInput => inputReader.IsDestinationInput;
 
@@ -25,7 +26,8 @@ namespace GameDev
         {
             this.texture = texture;
             animation = new Animations();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 3, 1);
+            animation.GetFramesFromTextureProperties(texture.Width, texture.Height,  3, 1);
+            //animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
             this.inputReader = inputReader;
             position = new Vector2(1, 1);
             speed = new Vector2(2, 2);
