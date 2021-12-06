@@ -31,7 +31,7 @@ namespace GameDev
 
             base.Initialize();
             hero = new Hero(_run, new KeyboardReader());
-            //hero = new Hero(_jump, new KeyboardReader());
+            
         }
 
         protected override void LoadContent()
@@ -39,7 +39,7 @@ namespace GameDev
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _run = Content.Load<Texture2D>("run-Sheet");
+            _run = Content.Load<Texture2D>("pokemon");
             _jump = Content.Load<Texture2D>("long-jump");
             _slash = Content.Load<Texture2D>("slash-Sheet");
             _death= Content.Load<Texture2D>("death-Sheet");
@@ -52,7 +52,7 @@ namespace GameDev
                 Exit();
 
             // TODO: Add your update logic here
-            hero.Update(gameTime);
+            hero.Update(gameTime);           
             base.Update(gameTime);
         }
 

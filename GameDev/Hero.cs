@@ -9,16 +9,18 @@ using GameDev.Input;
 
 namespace GameDev
 {
-    class Hero : IInputReader
+    class Hero : IGameObject
     {
         private Texture2D texture;
-        //private Rectangle deelRectangle;
+        private Rectangle deelRectangle;
         private Animations animation;
         private Vector2 position = new Vector2(0, 0);
         private Vector2 speed = new Vector2(1, 1);
         private Vector2 versnelling = new Vector2(0.1f, 0.1f);
         private IInputReader inputReader;
-        KeyboardState state = Keyboard.GetState();
+        
+
+
 
         public bool IsDestinationInput => inputReader.IsDestinationInput;
 
@@ -26,19 +28,25 @@ namespace GameDev
         {
             this.texture = texture;
             animation = new Animations();
-            animation.GetFramesFromTextureProperties(texture.Width, texture.Height,  3, 1);
+            //animation.GetFramesFromTextureProperties(texture.Width, texture.Height,  5, 5);
+           // deelRectangle = new Rectangle(0, 0, 32, 32);
+            animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
+            //animation.AddFrame(new AnimationFrame(new Rectangle(0, 0, 38, 28)));
             //animation.GetFramesFromTextureProperties(texture.Width, texture.Height, 8, 1);
+            
+            
             this.inputReader = inputReader;
             position = new Vector2(1, 1);
             speed = new Vector2(2, 2);
             versnelling = new Vector2(0.1f, 0.1f);
 
-            //deelRectangle = new Rectangle(schuifOp_X, 0, 180, 247);
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, animation.CurrentFrame.SourceRectangle, Color.White);
+            //spriteBatch.Draw(texture, position, deelRectangle, Color.White);
 
         }
 
@@ -61,7 +69,43 @@ namespace GameDev
 
         private void Move()
         {
+            KeyboardState state = Keyboard.GetState();
+
+            if (state.IsKeyDown(Keys.Up))
+            {
+                
+            animation.AddFrame(new AnimationFrame(new Rectangle(32, 64, 32, 32)));
+                    animation.AddFrame(new AnimationFrame(new Rectangle(64, 64, 32, 32)));
+                    animation.AddFrame(new AnimationFrame(new Rectangle(96, 64, 32, 32)));
+                
+            }
+            if (state.IsKeyDown(Keys.Left))
+            {
+                
+                animation.AddFrame(new AnimationFrame(new Rectangle(32, 0, 32, 32)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(64, 0, 32, 32)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 0, 32, 32)));
+                 /*animation.AddFrame(new AnimationFrame(new Rectangle(25, 112, 38, 28)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(50, 112, 38, 28)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(75, 112, 38, 28)));*/
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                
+                animation.AddFrame(new AnimationFrame(new Rectangle(32, 32, 32, 32)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(64, 32, 32, 32)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 32, 32, 32)));
+            }
+
+            if (state.IsKeyDown(Keys.Down))
+            {
+               
+                animation.AddFrame(new AnimationFrame(new Rectangle(32, 96, 32, 32)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(64, 96, 32, 32)));
+                animation.AddFrame(new AnimationFrame(new Rectangle(96, 96, 32, 32)));
+            }
             
+
             var direction = inputReader.ReadInput();
 
             if (inputReader.IsDestinationInput)
@@ -73,7 +117,7 @@ namespace GameDev
             direction *= speed;
             position += direction;
 
-
+            
         }
 
         public void ChangeInput(IInputReader inputReader)
